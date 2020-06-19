@@ -91,7 +91,7 @@ function Home() {
             width: isTabletOrMobileDevice ? "90%" : undefined,
           }}
         >
-          I though of Bleep on my drive to school one day. I had been without a
+          I thought of Bleep on my drive to school one day. I had been without a
           project for a few days and I was itching to start on a new one. I
           created the functionality over the next few weeks, but once summer
           started, I started working on other things and never finished the
