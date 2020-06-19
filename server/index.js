@@ -46,7 +46,7 @@ let io = socketIo(socketHttp);
 app.use(cors());
 app.use(express.static("../client/build"));
 
-app.set("port", process.env.PORT || 5000);
+app.set("port", process.env.PORT || 10000);
 const server = socketHttp.listen(app.get("port"), () => {
   console.log(`Express running → PORT ${server.address().port}`);
 });
