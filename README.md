@@ -1,4 +1,4 @@
-## Bleep
+## Bleep ![Build](https://github.com/ngregrichardson/Bleep/workflows/Build/badge.svg)
 
 #### About
 I thought of Bleep on my drive to school one day. I had been without a project for a few days and I was itching to start on a new one. I created the functionality over the next few weeks, but once summer started, I started working on other things and never finished the front end. A year later, as I was ending my first year of college, I decided to finish up some old projects: including Bleep. There are four simple steps to use Bleep.
