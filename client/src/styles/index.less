@@ -1,0 +1,147 @@
+@import '~rsuite/lib/styles/themes/dark/index.less';
+
+@base-color: #5cdb95;
+@primary-bg-color: #05386B;
+@text-color: #EDF5E1;
+@text-primary-color: #EDF5E1;
+
+@info-color: #2374FF;
+@info-light-color: #A6D1FF;
+
+@success-color: #8EE4AF;
+@success-light-color: #BFF6C9;
+
+@warning-color: #FFDE4B;
+@warning-light-color: #FFF19F;
+
+@error-color: #FF4F4F;
+@error-light-color: #FFA795;
+
+@panel-bg-color: #1f2833;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.rs-navbar-header {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  padding-left: 20px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.full-page-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.jumbotron-title {
+  font-size: 800%;-webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+
+}
+
+.jumbotron-bob {
+  position: absolute;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  width: 100%;
+}
+
+.jumbotron-icon {
+  color: @base-color;
+}
+
+.down-button {
+  position: absolute !important;
+  bottom: 50px;
+}
+
+.paragraph-center {
+  text-align: center;
+  font-size: 150%;
+  width: 50%;
+  color: @input-color-disabled;
+}
+
+.primary-text-color {
+  color: @base-color;
+}
+
+.margin-top-small {
+  margin-top: 10px;
+}
+
+.about-steps {
+  margin-top: 30px;
+  max-width: 60%;
+}
+
+.center-form {
+  background-color: @panel-bg-color;
+  width: 50vw;
+  height: 50vh;
+  border-radius: @border-radius-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.next-button {
+  margin-top: 15px;
+  align-self: flex-end;
+}
+
+.stage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage-title {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.uploader {
+  width: 100%;
+}
+
+.progress-message-loading {
+  margin-top: 15px;
+}
+
+.progress-message-success {
+  margin-top: 15px;
+  color: @success-color;
+}
+
+.progress-message-failed {
+  margin-top: 15px;
+  color: @error-color;
+}
+
+.download-button {
+  margin-top: 15px;
+  background-color: @success-color;
+}
