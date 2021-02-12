@@ -1,8 +1,9 @@
 
-uploads
 service-account.json
 
 .idea
+
+*/build
 
 # Logs
 logs

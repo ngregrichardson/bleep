@@ -8,7 +8,9 @@ const audioConcat = require("audioconcat");
 const speech = require("@google-cloud/speech");
 const extractAudio = require("ffmpeg-extract-audio");
 const converter = require("handbrake-js");
+const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
+ffmpeg.setFfmpegPath(ffmpegPath);
 const MP3Cutter = require("mp3-cutter");
 const http = require("http");
 const socketIo = require("socket.io");
@@ -46,16 +48,12 @@ let io = socketIo(socketHttp);
 app.use(cors());
 app.use(express.static("../client/build"));
 
-app.set("port", process.env.PORT || 10000);
+app.set("port", process.env.PORT || 7000);
 const server = socketHttp.listen(app.get("port"), () => {
   console.log(`Express running → PORT ${server.address().port}`);
 });
 
-app.get("/", (req, res) => {
-  return res.sendFile("../client/build/index.html");
-});
-
-app.post("/upload", multerConfig, (req, res) => {
+app.post("/bleep", multerConfig, (req, res) => {
   let progress = 0;
   let filesToDelete = [];
   let socketId;
@@ -117,7 +115,7 @@ app.post("/upload", multerConfig, (req, res) => {
       saveError({
         message: errorMessage,
         timestamp: admin.database.ServerValue.TIMESTAMP,
-        error,
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
         videoFilename,
         audioFilename,
         words,
@@ -258,7 +256,10 @@ app.post("/upload", multerConfig, (req, res) => {
                       saveError({
                         message: errorMessage,
                         timestamp: admin.database.ServerValue.TIMESTAMP,
-                        error,
+                        error: JSON.stringify(
+                          error,
+                          Object.getOwnPropertyNames(error)
+                        ),
                         videoFilename,
                         audioFilename,
                         words,
@@ -291,7 +292,10 @@ app.post("/upload", multerConfig, (req, res) => {
                           saveError({
                             message: errorMessage,
                             timestamp: admin.database.ServerValue.TIMESTAMP,
-                            error,
+                            error: JSON.stringify(
+                              error,
+                              Object.getOwnPropertyNames(error)
+                            ),
                             videoFilename,
                             audioFilename,
                             words,
@@ -317,7 +321,10 @@ app.post("/upload", multerConfig, (req, res) => {
                               saveError({
                                 message: errorMessage,
                                 timestamp: admin.database.ServerValue.TIMESTAMP,
-                                error,
+                                error: JSON.stringify(
+                                  error,
+                                  Object.getOwnPropertyNames(error)
+                                ),
                                 videoFilename,
                                 audioFilename,
                                 words,
@@ -367,7 +374,10 @@ app.post("/upload", multerConfig, (req, res) => {
                                         message: errorMessage,
                                         timestamp:
                                           admin.database.ServerValue.TIMESTAMP,
-                                        error,
+                                        error: JSON.stringify(
+                                          error,
+                                          Object.getOwnPropertyNames(error)
+                                        ),
                                         videoFilename,
                                         audioFilename,
                                         words,
@@ -389,7 +399,10 @@ app.post("/upload", multerConfig, (req, res) => {
                                     message: errorMessage,
                                     timestamp:
                                       admin.database.ServerValue.TIMESTAMP,
-                                    error,
+                                    error: JSON.stringify(
+                                      error,
+                                      Object.getOwnPropertyNames(error)
+                                    ),
                                     videoFilename,
                                     audioFilename,
                                     words,
@@ -415,7 +428,10 @@ app.post("/upload", multerConfig, (req, res) => {
                   saveError({
                     message: errorMessage,
                     timestamp: admin.database.ServerValue.TIMESTAMP,
-                    error,
+                    error: JSON.stringify(
+                      error,
+                      Object.getOwnPropertyNames(error)
+                    ),
                     videoFilename,
                     audioFilename,
                     words,
@@ -435,7 +451,7 @@ app.post("/upload", multerConfig, (req, res) => {
               saveError({
                 message: errorMessage,
                 timestamp: admin.database.ServerValue.TIMESTAMP,
-                error,
+                error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
                 videoFilename,
                 audioFilename,
                 words,
@@ -455,7 +471,7 @@ app.post("/upload", multerConfig, (req, res) => {
           saveError({
             message: errorMessage,
             timestamp: admin.database.ServerValue.TIMESTAMP,
-            error,
+            error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
             videoFilename,
             audioFilename,
             words,
@@ -470,6 +486,10 @@ app.post("/upload", multerConfig, (req, res) => {
           });
         });
     });
+});
+
+app.get("*", (req, res) => {
+  return res.sendFile(path.resolve("../client/build/index.html"));
 });
 
 let uid = () => {
@@ -492,7 +512,7 @@ let deleteFiles = (files) => {
 };
 
 let saveError = (params) => {
-  return new Promise((res, rej) => {
+  return new Promise((res) => {
     errorCollection
       .add(params)
       .then((docRef) => res(docRef))

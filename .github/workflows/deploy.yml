@@ -1,0 +1,45 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, primary]
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install client dependencies
+        run: yarn install
+        working-directory: ./client
+
+      - name: Install server dependencies
+        run: yarn install
+        working-directory: ./server
+
+      - name: Build
+        run: yarn build
+        working-directory: ./client
+
+      - name: Inject environment variables
+        run: |
+          touch .env
+          echo GOOGLE_APPLICATION_CREDENTIALS =${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} > .env
+          echo DATABASE_URL =${{ secrets.DATABASE_URL }} >> .env
+          echo STORAGE_BUCKET =${{ secrets.STORAGE_BUCKET }} >> .env
+          echo PORT =${{ secrets.PORT }} >> .env
+        working-directory: ./server
+
+      - name: Inject firebase credentials
+        run: |
+          mkdir firebase
+          touch service-account.json
+          echo ${{ secrets.FIREBASE_CREDENTIALS }} > service-account.json
+        working-directory: ./server
+
+      - name: Restart PM2
+        run: pm2 restart bleep
