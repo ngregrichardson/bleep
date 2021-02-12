@@ -486,15 +486,18 @@ const Upload = () => {
                 </Button>
               ) : null}
               {downloadUrl ? (
-                <Button
-                  as={Link}
-                  textDecoration={"none !important"}
-                  colorScheme={"brand"}
-                  href={downloadUrl}
-                  isExternal
-                >
-                  Get your s%*t
-                </Button>
+                <Stack as={Flex} spacing={"20px"}>
+                  <Button
+                    as={Link}
+                    textDecoration={"none !important"}
+                    colorScheme={"brand"}
+                    href={downloadUrl}
+                    isExternal
+                  >
+                    Get your s%*t
+                  </Button>
+                  <Button onClick={handleRestart}>Censor more</Button>
+                </Stack>
               ) : null}
             </Stack>
           )}
