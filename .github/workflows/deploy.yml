@@ -39,7 +39,7 @@ jobs:
           mkdir firebase
           cd firebase
           touch service-account.json
-          echo ${{ secrets.FIREBASE_CREDENTIALS }} > service-account.json
+          echo '${{ secrets.FIREBASE_CREDENTIALS }}' > service-account.json
         working-directory: ./server
 
       - name: Restart PM2
