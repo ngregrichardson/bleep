@@ -28,15 +28,16 @@ jobs:
       - name: Inject environment variables
         run: |
           touch .env
-          echo GOOGLE_APPLICATION_CREDENTIALS =${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} > .env
-          echo DATABASE_URL =${{ secrets.DATABASE_URL }} >> .env
-          echo STORAGE_BUCKET =${{ secrets.STORAGE_BUCKET }} >> .env
-          echo PORT =${{ secrets.PORT }} >> .env
+          echo GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} > .env
+          echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
+          echo STORAGE_BUCKET=${{ secrets.STORAGE_BUCKET }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
         working-directory: ./server
 
       - name: Inject firebase credentials
         run: |
           mkdir firebase
+          cd firebase
           touch service-account.json
           echo ${{ secrets.FIREBASE_CREDENTIALS }} > service-account.json
         working-directory: ./server
