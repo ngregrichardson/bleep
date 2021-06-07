@@ -235,7 +235,7 @@ app.post("/bleep", multerConfig, (req, res) => {
                   MP3Cutter.cut({
                     src: audioPath,
                     target: lastClipPath,
-                    start: transcript[transcript.length - 1].end,
+                    start: transcript[transcript.length - 1]?.end,
                   });
                   clips.push(lastClipPath);
                   filesToDelete.push(lastClipPath);
